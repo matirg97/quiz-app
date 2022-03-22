@@ -18,7 +18,21 @@ const Main = () => {
     const [finished, setFinished] = useState(false);
 
 
+    function handleAnswerSubmit(isCorrect, e) {
 
+        //Adding score
+        if (isCorrect) setScore(score + 1);
+
+        //Adding question's style => Changing the color when it's correct or incorrect.
+        e.target.classList.add(isCorrect ? "correct" : "incorrect")
+
+        //Moving to the next question.
+        if(actualQuestion === Questions.length - 1){
+            setFinished(true);
+        } else {
+            setActualQuestion(actualQuestion + 1);
+        }
+    }
 
 
     return (
@@ -31,7 +45,7 @@ const Main = () => {
             }}>
                 <div className='leftSide'>
                     <div className='questionNumber'>
-                        <span>Pregunta {actualQuestion + 1} de</span>{Questions.length}
+                        <span>Pregunta {actualQuestion + 1} de </span>{Questions.length}
                     </div>
                     <div className='questionTitle'>
                         {Questions[actualQuestion].title}
@@ -39,16 +53,18 @@ const Main = () => {
                 </div>
                 <div className='rightSide'>
                     {Questions[actualQuestion].options.map((ans) => (
-                        <Button
+                        <button
+                            className='ansButton'
                             variant="outlined"
                             sx={{
                                 width: 250,
                                 height: 30
                             }}
                             key={ans.responseText}
-                            >
+                            onClick={(e) => handleAnswerSubmit(ans.isCorrect, e)}
+                        >
                             {ans.responseText}
-                        </Button>
+                        </button>
                     ))}
                 </div>
             </Card>

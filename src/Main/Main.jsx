@@ -11,7 +11,7 @@ const Main = () => {
     //starting from 0(cero) is a little bit weird.
     const [actualQuestion, setActualQuestion] = useState(0);
 
-    //This state is saving the user answer's score 
+    //This state is saving the user answer's score;
     const [score, setScore] = useState(0);
 
 

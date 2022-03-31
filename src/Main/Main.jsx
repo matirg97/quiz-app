@@ -14,7 +14,7 @@ const Main = () => {
     //This state is saving the user answer's score;
     const [score, setScore] = useState(0);
 
-
+    //This state is evaluating if the person complete the quiz or not
     const [finished, setFinished] = useState(false);
 
 
@@ -27,16 +27,42 @@ const Main = () => {
         e.target.classList.add(isCorrect ? "correct" : "incorrect")
 
         //Moving to the next question.
-        if(actualQuestion === Questions.length - 1){
-            setFinished(true);
-        } else {
-            setActualQuestion(actualQuestion + 1);
-        }
+        setTimeout(() => {
+            if (actualQuestion === Questions.length - 1) {
+                setFinished(true);
+            } else {
+                setActualQuestion(actualQuestion + 1);
+            }
+        }, 1000)
     }
 
 
+
+    if (finished) return (
+        <main className='main-container'>
+        <Card className='principalCard' sx={{
+            width: 600,
+            height: 270,
+            backgroundColor: '#ede0d4',
+            boxShadow: "rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px"
+        }}>
+            <div className='leftSide'>
+                <div className='questionNumber'>
+                Obtuviste {score} de {Questions.length}{" "}
+                </div>
+            </div>
+            <button className='ansButton' onClick={() => (window.location.href = "/")}>
+                    {" "}
+                    Volver a jugar
+                </button>
+        </Card>
+        </main>
+    )
+
+
+
     return (
-        <main>
+        <main className='main-container'>
             <Card className='principalCard' sx={{
                 width: 600,
                 height: 270,
